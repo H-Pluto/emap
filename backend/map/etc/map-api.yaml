@@ -1,0 +1,12 @@
+Name: map-api
+Host: 0.0.0.0
+Port: 8888
+
+# ETCD 由 Docker Compose 注入
+Etcd:
+  Hosts:
+    - ${ETCD_HOST}
+  Key: map-api
+
+# 高德地图 APIKEY
+Amap_Key: ${AMAP_KEY}

@@ -1,0 +1,22 @@
+services:
+  etcd:
+    image: quay.io/coreos/etcd:v3.6.1
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+    networks:
+      - emap-net
+
+  map-api:
+    build: 
+      context: .
+      dockerfile: map/Dockerfile
+    environment:
+      - ETCD_HOST=etcd:2379
+    depends_on:
+      - etcd
+    networks:
+      - emap-net
+
+networks:
+  emap-net:
+    driver: bridge
